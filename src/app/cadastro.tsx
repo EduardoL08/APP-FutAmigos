@@ -47,7 +47,7 @@ export default function Cadastro() {
           <View style={styles.footerContainer}>
             <Text style={styles.footerText}>Já tem uma conta?</Text>
 
-            <Link href="/">
+            <Link href="/login" asChild>
               <Text style={styles.footerLink}> Entre aqui</Text>
             </Link>
           </View>

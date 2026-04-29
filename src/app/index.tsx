@@ -11,7 +11,6 @@ import { peladas } from "../data/arrayProdutos";
 import ProdutoCard from "../components/produtoCard";
 import { Link, router } from "expo-router";
 import { Input } from "../components/Input";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function Index() {
   const [busca, setBusca] = useState("");
@@ -50,6 +49,7 @@ export default function Index() {
           data={filtrados}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 100 }}
         />
       </View>

@@ -1,8 +1,8 @@
 import { Text, StyleSheet } from "react-native";
 
-interface Props {
+type Props = {
   message: string;
-}
+};
 
 export function EmptyList({ message }: Props) {
   return <Text style={styles.text}>{message}</Text>;

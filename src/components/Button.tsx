@@ -5,10 +5,10 @@ import {
   GestureResponderEvent,
 } from "react-native";
 
-interface Props {
+type Props = {
   label: string;
   onPress: (event: GestureResponderEvent) => void;
-}
+};
 
 export function Button({ label, onPress }: Props) {
   return (

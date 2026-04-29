@@ -20,15 +20,15 @@ export default function Layout() {
           <Stack.Screen name="meusJogos" options={{  headerShown: false }} />
           <Stack.Screen name="maps" options={{  headerShown: false }} />
 
-          <Stack.Screen name="perfil" options={{ title: "Voutar para Home" }} />
-          <Stack.Screen name="configuracoes" options={{ title: "Voutar para Perfil" }} />
-          <Stack.Screen name="peladas/[id]" options={{ title: "Detalhes da Pelada" }} />
+          <Stack.Screen name="perfil" options={{ title: "Voltar para Home" }} />
+          <Stack.Screen name="configuracoes" options={{ title: "Voltar para Perfil" }} />
+          <Stack.Screen name="peladas/[id]" options={{ title: "Voltar" }} />
+
           
         </Stack>
         
       </View>
 
-      {/* Navegação Inferior Fixa */}
       <View style={styles.footerContainer}>
         <View style={styles.footer}>
           <Link href="/" asChild>
@@ -41,7 +41,7 @@ export default function Layout() {
           <Link href="/meusJogos" asChild>
             <TouchableOpacity style={styles.tabItem}>
               <Ionicons name="football" size={24} color="#fff" />
-              <Text style={styles.footerLink}>Jogos</Text>
+              <Text style={styles.footerLink}>Meus Jogos</Text>
             </TouchableOpacity>
           </Link>
 

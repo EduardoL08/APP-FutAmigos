@@ -1,8 +1,8 @@
 import { Text, StyleSheet } from "react-native";
 
-interface Props {
+type Props = {
   title: string;
-}
+};
 
 export function Header({ title }: Props) {
   return <Text style={styles.titulo}>{title}</Text>;

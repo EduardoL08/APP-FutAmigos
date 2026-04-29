@@ -23,7 +23,7 @@ export default function Detalhe() {
       <InfoRow label="Data" value={produto.data} />
       <InfoRow label="Horário" value={produto.horario} />
       <InfoRow label="Vagas" value={produto.vagas} />
-      <InfoRow label="Nível" value={produto.nivel} />
+      <InfoRow label="Status" value={produto.status} />
 
       <Button label="Entrar na pelada" onPress={() => console.log("Entrou")} />
     </View>

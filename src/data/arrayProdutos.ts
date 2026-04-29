@@ -7,10 +7,12 @@ export type produto = {
   data: string;
   horario: string;
   jogadores: number;
+  participando: boolean
   vagas: number;
-  nivel: "Iniciante" | "Intermediário" | "Avançado";
+  status: "organizador" | "confirmado" | "pendente"; 
   latitude?: number;
   longitude?: number;
+  estouParticipando: true
   
 }
 
@@ -24,8 +26,13 @@ export const peladas: produto[] = [
     data: "30/04/2026",
     horario: "18:00",
     jogadores: 14,
+    participando: true,
     vagas: 4,
-    nivel: "Intermediário",
+    status: "organizador",
+    latitude: -19.9375,
+    longitude: -43.9375,
+    estouParticipando: true
+
   },
   {
     id: 2,
@@ -36,9 +43,14 @@ export const peladas: produto[] = [
     data: "01/05/2026",
     horario: "19:00",
     jogadores: 10,
+    participando: false,
     vagas: 2,
-    nivel: "Iniciante",
+    status: "pendente",
+    latitude: -19.9375,
+    longitude: -43.9375,
+    estouParticipando: true
   },
+   
   {
     id: 3,
     titulo: "Pelada noturna Savassi",
@@ -48,10 +60,12 @@ export const peladas: produto[] = [
     data: "02/05/2026",
     horario: "20:00",
     jogadores: 10,
+    participando: true,
     vagas: 0,
-    nivel: "Avançado",
+    status: "confirmado",
     latitude: -19.9375,
     longitude: -43.9375,
+    estouParticipando: true
   },
   {
     id: 4,
@@ -62,10 +76,12 @@ export const peladas: produto[] = [
     data: "03/05/2026",
     horario: "17:00",
     jogadores: 12,
+    participando: false,
     vagas: 6,
-    nivel: "Iniciante",
+    status: "pendente",
     latitude: -19.9295,
     longitude: -43.9375,
+    estouParticipando: true
   },
   {
   id: 1,
@@ -76,9 +92,11 @@ export const peladas: produto[] = [
     data: "30/04/2026",
   horario: "18:00",
   jogadores: 14,
+  participando: true,
   vagas: 2,
-  nivel: "Intermediário",
+  status: "organizador",
   latitude: -19.9167,
   longitude: -43.9345,
+  estouParticipando: true
 }
 ];

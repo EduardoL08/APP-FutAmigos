@@ -1,7 +1,7 @@
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, TextInputProps } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export function SearchInput(props: any) {
+export function SearchInput(props: TextInputProps) {
   return (
     <View style={styles.container}>
       <Ionicons name="search" size={20} color="#777" />

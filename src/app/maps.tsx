@@ -1,10 +1,22 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { router } from "expo-router";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { ScrollView } from "react-native";
 
 export default function Maps() {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Mapa com Locais dos Jogos</Text>
+      <View style={styles.header}>
+      <View>
+        <Text style={styles.title}>Mapa com Locais dos Jogos</Text>
+        <Text style={styles.subtitulo}>Encontre quadras e campos próximos a você</Text>
+      </View>
+      <TouchableOpacity onPress={() => router.push("/perfil")}>
+        <Image
+          source={{ uri: "https://i.pravatar.cc/100" }}
+          style={styles.avatar}
+                  />
+              </TouchableOpacity>
+      </View>
 
       <View style={styles.filtros}>
         <TouchableOpacity style={styles.filtroAtivo}>
@@ -53,27 +65,45 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     padding: 16,
   },
+   header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+  },
 
-  subtitle: {
-    color: "#888",
+  subtitulo: {
+    fontSize: 16,
+    color: "#777",
+    marginTop: 4,
   },
 
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 15,
+    color: "#000",
   },
 
   filtros: {
     flexDirection: "row",
     marginBottom: 15,
+
+  },
+  avatar: {
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
+    borderWidth: 2,
+    borderColor: "#eee",
   },
 
   filtro: {
     backgroundColor: "#eee",
     paddingHorizontal: 15,
     paddingVertical: 8,
-    borderRadius: 10,
+    borderRadius: 12,
     marginRight: 10,
   },
 
@@ -81,8 +111,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#2ECC71",
     paddingHorizontal: 15,
     paddingVertical: 8,
-    borderRadius: 10,
-    marginRight: 10,
+    borderRadius: 12,
+    marginRight: 20,
+    alignItems: "center",
+    justifyContent: "center",
+
   },
 
   filtroTextoAtivo: {

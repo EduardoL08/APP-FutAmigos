@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 
-interface Props {
+type Props = {
   label: string;
   value: string | number;
-}
+};
 
 export function InfoRow({ label, value }: Props) {
   return (

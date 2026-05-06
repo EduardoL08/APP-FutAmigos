@@ -1,31 +1,32 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { peladas } from "../../data/arrayProdutos";
+import { peladas } from "../../data/arrayMeusJogos";
 import { Button } from "../../components/Button";
 import { InfoRow } from "../../components/InfoRow";
 
 export default function Detalhe() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  const produto = peladas.find((p) => p.id.toString() === id);
+  const jogo = peladas.find((p) => p.id.toString() === id);
 
-  if (!produto) {
+  if (!jogo) {
     return <Text>Item não encontrado</Text>;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>{produto.titulo}</Text>
+      <Text style={styles.titulo}>{jogo.titulo}</Text>
 
-      <Text style={styles.descricao}>{produto.descricao}</Text>
+      <Text style={styles.descricao}>{jogo.descricao}</Text>
 
-      <InfoRow label="Local" value={produto.local} />
-      <InfoRow label="Data" value={produto.data} />
-      <InfoRow label="Horário" value={produto.horario} />
-      <InfoRow label="Vagas" value={produto.vagas} />
-      <InfoRow label="Status" value={produto.status} />
+      <InfoRow label="Local" value={jogo.local} />
+      <InfoRow label="Data" value={jogo.data} />
+      <InfoRow label="Horário" value={jogo.horario} />
+      <InfoRow label="Vagas" value={jogo.vagas} />
+      <InfoRow label="Status" value={jogo.status} />
+      <InfoRow label="Preço" value={jogo.preco} />
 
-      <Button label="Entrar na pelada" onPress={() => console.log("Entrou")} />
+      <Button label="Participar" onPress={() => console.log("Entrou")} />
     </View>
   );
 }

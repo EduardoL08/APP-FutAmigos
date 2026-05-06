@@ -4,14 +4,13 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 
 export default function Login() {
-
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -20,13 +19,8 @@ export default function Login() {
   }
 
   return (
-     <View style={styles.container}>
-
-      <Input
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
+    <View style={styles.container}>
+      <Input placeholder="Email" value={email} onChangeText={setEmail} />
 
       <Input
         placeholder="Senha"
@@ -35,11 +29,7 @@ export default function Login() {
         secureTextEntry
       />
 
-      <Button
-        label="Entrar"
-        onPress={handleLogin}
-      />
-
+      <Button label="Entrar" onPress={handleLogin} />
     </View>
   );
 }

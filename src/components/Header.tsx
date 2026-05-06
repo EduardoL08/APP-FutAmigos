@@ -9,10 +9,10 @@ export function Header({ title }: Props) {
 }
 
 const styles = StyleSheet.create({
-titulo: {
-  fontSize: 24,
-  fontWeight: "bold",
-  marginBottom: 15,
-  marginTop: 10, 
-},
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 15,
+    marginTop: 10,
+  },
 });

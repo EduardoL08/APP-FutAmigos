@@ -1,54 +1,76 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { peladas } from "../data/arrayProdutos";
-import ProdutoCard from "../components/produtoCard";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { peladas } from "../data/arrayMeusJogos";
+import CardMeusJogos from "../components/cardMeusJogos";
 import { router } from "expo-router";
 
 export default function MeusJogos() {
   const [abaAtiva, setAbaAtiva] = useState("Próximos");
 
-  const dadosFiltrados = peladas.filter(p => p.estouParticipando);
+  const dadosFiltrados = peladas.filter((p) => {
+    if (abaAtiva === "Próximos") {
+      return (
+        p.participando === true &&
+        (p.status === "participando" || p.status === "organizador")
+      );
+    } else {
+      return p.status === "conviteRecebido";
+    }
+  });
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text style={styles.headerTitle}>Meus Jogos</Text>
-          <Text style={styles.headerSub}>Confira seus próximos jogos e convites</Text>
+          <Text style={styles.headerSub}>Confira seus convites</Text>
         </View>
         <TouchableOpacity onPress={() => router.push("/perfil")}>
-            <Image
-              source={{ uri: "https://i.pravatar.cc/100" }}
-              style={styles.avatar}
-            />
+          <Image
+            source={{ uri: "https://i.pravatar.cc/100" }}
+            style={styles.avatar}
+          />
         </TouchableOpacity>
       </View>
 
       <View style={styles.tabContainer}>
-        {["Próximos", "Convites", "Histórico"].map((tab) => (
-          <TouchableOpacity 
+        {["Próximos", "Convites"].map((tab) => (
+          <TouchableOpacity
             key={tab}
             onPress={() => setAbaAtiva(tab)}
-            style={[styles.tabButton, abaAtiva === tab && styles.tabButtonActive]}
+            style={[
+              styles.tabButton,
+              abaAtiva === tab && styles.tabButtonActive,
+            ]}
           >
-            <Text style={[styles.tabText, abaAtiva === tab && styles.tabTextActive]}>
+            <Text
+              style={[styles.tabText, abaAtiva === tab && styles.tabTextActive]}
+            >
               {tab}
             </Text>
           </TouchableOpacity>
         ))}
       </View>
-      
-      <View style={styles.body}>
+
       <FlatList
         data={dadosFiltrados}
-        renderItem={({ item }) => <ProdutoCard produto={item} />}
+        renderItem={({ item }) => <CardMeusJogos jogos={item} />}
         keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 120 }}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 }}
       />
-      </View>
 
-      <TouchableOpacity style={styles.fab}>
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => router.push("/criarJogos")}
+      >
         <Text style={styles.fabText}>+</Text>
       </TouchableOpacity>
     </View>
@@ -56,56 +78,43 @@ export default function MeusJogos() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    paddingHorizontal: 16,
-    paddingTop: 20,
-  },
-   body: {
-    flex: 1,
-    padding: 16,
-  },
- header: {
+  container: { flex: 1, backgroundColor: "#f5f5f5" },
+  header: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 10,
+    paddingTop: 50,
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    alignItems: "center",
+    marginBottom: 15,
   },
-  headerTitle: { fontSize: 24, fontWeight: 'bold', color: '#000000' },
-  headerSub: { color: '#666', fontSize: 14 },
-  avatar: {
-    width: 55,
-    height: 55,
-    borderRadius: 27.5,
-    borderWidth: 2,
-    borderColor: "#eee",
+  headerTitle: { fontSize: 26, fontWeight: "bold" },
+  headerSub: { color: "#666" },
+  avatar: { width: 50, height: 50, borderRadius: 25 },
+  tabContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    marginBottom: 15,
   },
-  tabContainer: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20, paddingHorizontal: 20,  },
-  tabButton: { 
-    paddingVertical: 8, 
-    paddingHorizontal: 16, 
-    borderRadius: 8, 
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#EEE'
+  tabButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginRight: 10,
+    backgroundColor: "#fff",
   },
-  tabButtonActive: { backgroundColor: '#27AE60', borderColor: '#27AE60' },
-  tabText: { color: '#666', fontWeight: '600' },
-  tabTextActive: { color: '#FFF' },
+  tabButtonActive: { backgroundColor: "#123b17" },
+  tabTextActive: { color: "#fff" },
+  tabText: { fontWeight: "600", color: "#666" },
   fab: {
     position: "absolute",
-    bottom: 30,
+    bottom: 115,
     right: 20,
-    backgroundColor: "#27AE60",
-    width: 60,
-    height: 60,
-    borderRadius: 15,
+    backgroundColor: "#123b17",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     justifyContent: "center",
     alignItems: "center",
-    elevation: 4,
+    elevation: 8,
   },
-  fabText: { color: "#fff", fontSize: 30 },
+  fabText: { color: "#fff", fontSize: 28 },
 });

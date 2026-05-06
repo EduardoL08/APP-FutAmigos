@@ -14,18 +14,18 @@ export function SearchInput(props: TextInputProps) {
   );
 }
 const styles = StyleSheet.create({
-container: {
-  flexDirection: "row",
-  alignItems: "center",
-  backgroundColor: "#fff",
-  borderRadius: 12,
-  paddingHorizontal: 10,
-  height: 50,
-  marginBottom: 20,
-},
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    height: 50,
+    marginBottom: 20,
+  },
 
-input: {
-  marginLeft: 10,
-  flex: 1,
-},
+  input: {
+    marginLeft: 10,
+    flex: 1,
+  },
 });

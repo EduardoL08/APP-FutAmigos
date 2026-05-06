@@ -1,61 +1,87 @@
 import { router } from "expo-router";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Dimensions,
+  SafeAreaView,
+} from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 export default function Maps() {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-      <View>
-        <Text style={styles.title}>Mapa com Locais dos Jogos</Text>
-        <Text style={styles.subtitulo}>Encontre quadras e campos próximos a você</Text>
-      </View>
-      <TouchableOpacity onPress={() => router.push("/perfil")}>
-        <Image
-          source={{ uri: "https://i.pravatar.cc/100" }}
-          style={styles.avatar}
-                  />
-              </TouchableOpacity>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 100 }}
+      >
+        <View style={styles.header}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.titulo}>Mapa de Jogos</Text>
+            <Text style={styles.subtitulo}>Encontre locais próximos</Text>
+          </View>
+          <TouchableOpacity onPress={() => router.push("/perfil")}>
+            <Image
+              source={{ uri: "https://i.pravatar.cc/100" }}
+              style={styles.avatar}
+            />
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.filtros}>
-        <TouchableOpacity style={styles.filtroAtivo}>
-          <Text style={styles.filtroTextoAtivo}>Todos</Text>
-        </TouchableOpacity>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.filtrosScroll}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
+        >
+          <TouchableOpacity style={styles.filtroAtivo}>
+            <Text style={styles.filtroTextoAtivo}>Todos</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.filtro}>
+            <Text style={styles.filtroTexto}>Quadras</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.filtro}>
+            <Text style={styles.filtroTexto}>Campos</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.filtro}>
+            <Text style={styles.filtroTexto}>Society</Text>
+          </TouchableOpacity>
+        </ScrollView>
 
-        <TouchableOpacity style={styles.filtro}>
-          <Text>Quadras</Text>
-        </TouchableOpacity>
+        <View style={styles.mapa}>
+          <Text style={{ color: "#567d5d", fontWeight: "bold" }}>
+            Será integrado com API de mapas posteriormente e exibirá os locais
+            próximos com base na localização do usuário.
+          </Text>
+        </View>
 
-        <TouchableOpacity style={styles.filtro}>
-          <Text>Campos</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.content}>
+          <View style={styles.cardResumo}>
+            <Text style={styles.tituloCard}>12 locais encontrados</Text>
+            <Text style={styles.subCard}>
+              Quadras e campos em até 5 km de você.
+            </Text>
+            <TouchableOpacity style={styles.botaoRota}>
+              <Text style={styles.botaoRotaTexto}>Ver rota mais rápida</Text>
+            </TouchableOpacity>
+          </View>
 
-      <View style={styles.mapaFake}>
-        <iframe
-          src="https://www.google.com/maps?q=-19.9167,-43.9345&z=13&output=embed"
-          style={styles.iframe}
-        />
-      </View>
+          <Text style={styles.section}>Locais em destaque</Text>
 
-      <View style={styles.cardResumo}>
-        <Text style={styles.tituloCard}>12 locais próximos</Text>
-        <Text style={styles.subCard}>
-          Quadras, campos e sociedade em até 5 km
-        </Text>
-
-        <TouchableOpacity style={styles.botaoRota}>
-          <Text>Ver rota</Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.section}>Locais em destaque</Text>
-
-      <View style={styles.cardLocal}>
-        <Text style={styles.nome}>Arena Zona Sul</Text>
-        <Text style={styles.distancia}>1,2 km</Text>
-      </View>
-    </ScrollView>
+          <TouchableOpacity style={styles.cardLocal}>
+            <View>
+              <Text style={styles.nomeLocal}>Arena Zona Sul</Text>
+              <Text style={styles.distancia}>1,2 km de distância</Text>
+            </View>
+            <Text style={{ fontSize: 20 }}>⚽</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -63,125 +89,106 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-    padding: 16,
   },
-   header: {
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 50,
   },
-
-  subtitulo: {
-    fontSize: 16,
-    color: "#777",
-    marginTop: 4,
-  },
-
-  title: {
-    fontSize: 24,
+  titulo: {
+    fontSize: width * 0.06,
     fontWeight: "bold",
-    color: "#000",
+    color: "#1A1A1A",
   },
-
-  filtros: {
-    flexDirection: "row",
-    marginBottom: 15,
-
+  subtitulo: {
+    fontSize: 14,
+    color: "#666",
+    marginTop: 2,
   },
   avatar: {
-    width: 55,
-    height: 55,
-    borderRadius: 27.5,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     borderWidth: 2,
-    borderColor: "#eee",
+    borderColor: "#fff",
   },
-
-  filtro: {
-    backgroundColor: "#eee",
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    borderRadius: 12,
-    marginRight: 10,
-  },
-
-  filtroAtivo: {
-    backgroundColor: "#2ECC71",
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    borderRadius: 12,
-    marginRight: 20,
-    alignItems: "center",
-    justifyContent: "center",
-
-  },
-
-  filtroTextoAtivo: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-
-  mapaFake: {
-    height: 200,
-    backgroundColor: "#cde5d1",
-    borderRadius: 16,
-    marginBottom: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  cardResumo: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 16,
+  filtrosScroll: {
+    maxHeight: 50,
     marginBottom: 20,
   },
-
-  tituloCard: {
-    fontSize: 16,
-    fontWeight: "bold",
+  filtro: {
+    backgroundColor: "#fff",
+    paddingHorizontal: 20,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#eee",
   },
-
-  subCard: {
-    color: "#777",
-    marginTop: 5,
+  filtroAtivo: {
+    backgroundColor: "#123b17",
+    paddingHorizontal: 20,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+    justifyContent: "center",
   },
-
+  filtroTexto: { color: "#666", fontWeight: "600" },
+  filtroTextoAtivo: { color: "#fff", fontWeight: "bold" },
+  mapa: {
+    width: width - 40,
+    height: height * 0.25,
+    backgroundColor: "#cde5d1",
+    borderRadius: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#b5d4ba",
+    borderStyle: "dashed",
+  },
+  content: {
+    paddingHorizontal: 20,
+  },
+  cardResumo: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 20,
+    marginBottom: 25,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+  },
+  tituloCard: { fontSize: 18, fontWeight: "bold" },
+  subCard: { color: "#777", marginTop: 5 },
   botaoRota: {
     backgroundColor: "#e6f4ea",
-    marginTop: 10,
-    padding: 10,
-    borderRadius: 10,
-    alignSelf: "flex-start",
+    marginTop: 15,
+    padding: 12,
+    borderRadius: 12,
+    alignItems: "center",
   },
-
+  botaoRotaTexto: { color: "#123b17", fontWeight: "bold" },
   section: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 15,
+    color: "#123b17",
   },
-
   cardLocal: {
     backgroundColor: "#fff",
-    padding: 15,
+    padding: 18,
     borderRadius: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 10,
   },
-
-  nome: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-
-  distancia: {
-    color: "#2ECC71",
-    marginTop: 5,
-  },
-  iframe: {
-    width: "100%",
-    height: "100%",
-    borderWidth: 0,
-  },
+  nomeLocal: { fontSize: 16, fontWeight: "bold" },
+  distancia: { color: "#2ECC71", marginTop: 4, fontWeight: "600" },
 });

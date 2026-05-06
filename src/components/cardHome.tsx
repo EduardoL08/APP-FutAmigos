@@ -1,19 +1,22 @@
+/*
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { router } from "expo-router";
-import { produto } from "../data/arrayProdutos";
+import { jogos } from "../data/arrayMeusJogos";
 
 type Props = {
-  produto: produto;
+  produto: jogos;
 };
 
-export default function ProdutoCard({ produto }: Props) {
+export default function CardMeusJogos({ produto }: Props) {
   const coresStatus = {
     organizador: { bg: "#E8F5E9", text: "#2E7D32", label: "Organizador" },
-    confirmado: { bg: "#2ECC71", text: "#FFF", label: "Confirmado" },
-    pendente: { bg: "#ffe604ad", text: "#000000", label: "Pendente" },
+    participando: { bg: "#2ECC71", text: "#FFF", label: "Participando" },
+    conviteRecebido: { bg: "#ffe604ad", text: "#000000", label: "Pendente" },
+    vagasDisponiveis: { bg: "#4CAF50", text: "#FFF", label: "Vagas Disponíveis" },
+
   };
 
-  const statusAtual = coresStatus[produto.status] || coresStatus.confirmado;
+  const statusAtual = coresStatus[produto.status] || coresStatus.participando;
 
   return (
     <View style={styles.card}>
@@ -51,27 +54,24 @@ export default function ProdutoCard({ produto }: Props) {
           </Text>
         </View>
 
-        {produto.status === "pendente" ? (
+        {produto.status === "conviteRecebido  " ? (
           <View style={styles.botoesConvite}>
             <TouchableOpacity style={styles.btnRecusar}>
-              <Text style={styles.txtRecusar}>Recusar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnAceitar}>
-              <Text style={styles.txtAceitar}>Aceitar</Text>
+              <Text style={styles.txtRecusar}>Participa</Text>
             </TouchableOpacity>
           </View>
         ) : (
           <TouchableOpacity
             style={[
               styles.botao,
-              produto.status === "confirmado" && styles.botaoOutline,
+              produto.status === "participando" && styles.botaoOutline,
             ]}
             onPress={() => router.push(`../peladas/${produto.id}`)}
           >
             <Text
               style={[
                 styles.botaoText,
-                produto.status === "confirmado" && styles.botaoTextOutline,
+                produto.status === "participando" && styles.botaoTextOutline,
               ]}
             >
               {produto.status === "organizador" ? "Gerenciar" : "Ver Detalhes"}
@@ -152,3 +152,4 @@ const styles = StyleSheet.create({
   btnAceitar: { padding: 10, borderRadius: 10, backgroundColor: "#2ECC71" },
   txtAceitar: { color: "#FFF", fontWeight: "bold" },
 });
+*/

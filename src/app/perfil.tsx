@@ -23,7 +23,7 @@ export default function Perfil() {
       </View>
 
       <Link href="../configuracoes">
-        <Text style={styles.link}>Ir para Configurações</Text>
+        <Text style={styles.link}>Ir para Configurações → </Text>
       </Link>
     </View>
   );
@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   link: {
-    color: "#2ECC71",
-    marginTop: 20,
+    color: "#123b17",
     fontWeight: "bold",
+    fontSize: 16,
   },
 });

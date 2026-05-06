@@ -10,7 +10,7 @@ export default function CardMeusJogos({ jogos }: Props) {
   const coresStatus = {
     organizador: { bg: "#E8F5E9", text: "#2E7D32", label: "Organizador" },
     participando: { bg: "#2ECC71", text: "#FFF", label: "Participando" },
-    conviteRecebido: { bg: "#ffe604ad", text: "#000000", label: "Convidado" },
+    conviteRecebido: { bg: "#ffe604ad", text: "#000000", label: "Convite" },
     entrar: { bg: "#49644a", text: "#FFF", label: "Entrar" },
   };
 
@@ -23,7 +23,7 @@ export default function CardMeusJogos({ jogos }: Props) {
       onPress={() => router.push(`../detalhes/${jogos.id}`)}
     >
       <View style={styles.header}>
-        <View>
+        <View style={styles.textContainer}>
           <Text style={styles.titulo}>{jogos.titulo}</Text>
           <Text style={styles.subTitulo}>{jogos.descricao}</Text>
         </View>
@@ -67,7 +67,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 
-  titulo: { fontSize: 16, fontWeight: "bold", flex: 1, marginRight: 8 },
+  textContainer: {
+    flex: 1,
+    paddingRight: 10,
+  },
+
+  titulo: { fontSize: 16, fontWeight: "bold", marginRight: 8 },
 
   subTitulo: { color: "#777", fontSize: 15 },
 

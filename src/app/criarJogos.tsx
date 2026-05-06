@@ -8,13 +8,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  StatusBar,
-  Dimensions,
 } from "react-native";
 import { router } from "expo-router";
 import { Input } from "../components/Input";
-
-const { width } = Dimensions.get("window");
 
 export default function CriarJogos() {
   const [form, setForm] = useState({
@@ -44,8 +40,8 @@ export default function CriarJogos() {
           contentContainerStyle={styles.scrollContent}
         >
           <View style={styles.header}>
-            <Text style={styles.title}>Novo Jogo</Text>
-            <Text style={styles.subtitle}>Preencha os detalhes do jogo</Text>
+            <Text style={styles.titulo}>Novo Jogo</Text>
+            <Text style={styles.subtitulo}>Preencha os detalhes do jogo</Text>
           </View>
 
           <View style={styles.formCard}>
@@ -142,13 +138,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingLeft: 10,
   },
-  title: {
-    fontSize: width * 0.08,
+ titulo: {
+    fontSize: 30,
     fontWeight: "bold",
-    color: "#123b17",
+    color: "#000000",
   },
-  subtitle: {
-    fontSize: 16,
+  subtitulo: {
+    fontSize: 15,
     color: "#666",
     marginTop: 2,
   },

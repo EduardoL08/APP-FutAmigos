@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Platform,
+  StatusBar,
 } from "react-native";
 import { peladas } from "../data/arrayMeusJogos";
 import CardMeusJogos from "../components/cardMeusJogos";
@@ -29,8 +31,8 @@ export default function MeusJogos() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.headerTitle}>Meus Jogos</Text>
-          <Text style={styles.headerSub}>Confira seus convites</Text>
+          <Text style={styles.titulo}>Meus Jogos</Text>
+          <Text style={styles.subtitulo}>Confira seus convites</Text>
         </View>
         <TouchableOpacity onPress={() => router.push("/perfil")}>
           <Image
@@ -78,17 +80,31 @@ export default function MeusJogos() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f5f5f5" },
+  container: { flex: 1, backgroundColor: "#f5f5f5", paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 },
   header: {
     flexDirection: "row",
-    paddingTop: 50,
-    paddingHorizontal: 20,
+    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
-  headerTitle: { fontSize: 26, fontWeight: "bold" },
-  headerSub: { color: "#666" },
-  avatar: { width: 50, height: 50, borderRadius: 25 },
+  titulo: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#000000",
+  },
+  subtitulo: {
+    fontSize: 15,
+    color: "#666",
+    marginTop: 2,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 2,
+    borderColor: "#fff",
+  },
   tabContainer: {
     flexDirection: "row",
     paddingHorizontal: 20,

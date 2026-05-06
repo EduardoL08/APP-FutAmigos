@@ -4,16 +4,19 @@ import {
   TouchableOpacity,
   Text,
   SafeAreaView,
-  Dimensions,
 } from "react-native";
-import { Stack, Link } from "expo-router";
+import { Stack, Link, usePathname } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-const { width } = Dimensions.get("window");
-
 export default function Layout() {
+  const pathname = usePathname();
+
+  const routesWithoutFooter = ["/", "/cadastro", "/perfil", "/configuracoes", "/detalhes/[id]", "/criarJogos"];
+
+  const showFooter = !routesWithoutFooter.includes(pathname);
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={{ flex: 1 }}>
         <Stack
           screenOptions={{
@@ -23,8 +26,10 @@ export default function Layout() {
           }}
         >
           <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="cadastro" options={{ headerShown: false }} />
           <Stack.Screen name="meusJogos" options={{ headerShown: false }} />
           <Stack.Screen name="maps" options={{ headerShown: false }} />
+          <Stack.Screen name="home" options={{ headerShown: false }} />
 
           <Stack.Screen name="perfil" options={{ title: "Voltar" }} />
           <Stack.Screen name="configuracoes" options={{ title: "Voltar" }} />
@@ -33,30 +38,32 @@ export default function Layout() {
         </Stack>
       </View>
 
-      <View style={styles.footerContainer}>
-        <View style={styles.footer}>
-          <Link href="/" asChild>
-            <TouchableOpacity style={styles.tabItem}>
-              <Ionicons name="home" size={width * 0.06} color="#fff" />
-              <Text style={styles.footerLink}>Home</Text>
-            </TouchableOpacity>
-          </Link>
+      {showFooter && (
+        <View style={styles.footerContainer}>
+          <View style={styles.footer}>
+            <Link href={"/home"} asChild>
+              <TouchableOpacity style={styles.tabItem}>
+                <Ionicons name="home" size={25} color="#fff" />
+                <Text style={styles.footerLink}>Home</Text>
+              </TouchableOpacity>
+            </Link>
 
-          <Link href="/meusJogos" asChild>
-            <TouchableOpacity style={styles.tabItem}>
-              <Ionicons name="football" size={width * 0.06} color="#fff" />
-              <Text style={styles.footerLink}>Meus Jogos</Text>
-            </TouchableOpacity>
-          </Link>
+            <Link href={"/meusJogos"} asChild>
+              <TouchableOpacity style={styles.tabItem}>
+                <Ionicons name="football" size={25} color="#fff" />
+                <Text style={styles.footerLink}>Meus Jogos</Text>
+              </TouchableOpacity>
+            </Link>
 
-          <Link href="/maps" asChild>
-            <TouchableOpacity style={styles.tabItem}>
-              <Ionicons name="map" size={width * 0.06} color="#fff" />
-              <Text style={styles.footerLink}>Maps</Text>
-            </TouchableOpacity>
-          </Link>
+            <Link href={"/maps"} asChild>
+              <TouchableOpacity style={styles.tabItem}>
+                <Ionicons name="map" size={25} color="#fff" />
+                <Text style={styles.footerLink}>Maps</Text>
+              </TouchableOpacity>
+            </Link>
+          </View>
         </View>
-      </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -66,7 +73,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 40,
     width: "100%",
-    paddingHorizontal: width * 0.05,
+    paddingHorizontal: 20,
     alignItems: "center",
   },
   footer: {

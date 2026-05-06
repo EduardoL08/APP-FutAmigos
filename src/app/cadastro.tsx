@@ -10,8 +10,15 @@ import {
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 
 export default function Cadastro() {
+const router = useRouter();
+  const handleLogin = () => {
+
+    router.replace("/");
+
+  };
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -40,14 +47,14 @@ export default function Cadastro() {
 
             <Button
               label="Cadastrar"
-              onPress={() => console.log("Cadastrado")}
+              onPress={handleLogin}
             />
           </View>
 
           <View style={styles.footerContainer}>
             <Text style={styles.footerText}>Já tem uma conta?</Text>
 
-            <Link href="/login" asChild>
+            <Link href="/" asChild>
               <Text style={styles.footerLink}> Entre aqui</Text>
             </Link>
           </View>
@@ -65,9 +72,9 @@ const styles = StyleSheet.create({
 
   illustration: {
     width: "100%",
-    height: 330,
-    resizeMode: "contain",
-    marginTop: 62,
+    height: 250,
+    resizeMode: "center",
+    marginTop: 20,
   },
 
   title: {
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
   footerLink: {
     marginLeft: 4,
     fontWeight: "700",
-    color: "#08009ee9",
+    color: "#28955fe9",
   },
   footerContainer: {
     flexDirection: "row",

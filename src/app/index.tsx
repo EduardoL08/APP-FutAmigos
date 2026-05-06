@@ -1,109 +1,118 @@
-import React, { useState } from "react";
 import {
   View,
   Text,
-  FlatList,
   StyleSheet,
-  TouchableOpacity,
   Image,
-  SafeAreaView,
-  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
   Platform,
-  StatusBar,
 } from "react-native";
-import { peladas } from "../data/arrayMeusJogos";
-import CardMeusJogos from "../components/cardMeusJogos";
-import { router } from "expo-router";
 import { Input } from "../components/Input";
+import { Button } from "../components/Button";
+import { Link } from "expo-router";
+import { useRouter } from "expo-router";
+import { useState } from "react";
 
-const { width } = Dimensions.get("window");
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-export default function Index() {
-  const [busca, setBusca] = useState("");
-  const nome = "Usuário";
-
-  const filtrados = peladas.filter(
-    (item) =>
-      item.titulo.toLowerCase().includes(busca.toLowerCase()) ||
-      item.local.toLowerCase().includes(busca.toLowerCase()),
-  );
+  const handleLogin = () => {
+    router.replace("/home");
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.nome}>Olá, {nome}! </Text>
-          <Text style={styles.subtitulo}>Pronto para o próximo jogo?</Text>
-        </View>
-
-        <TouchableOpacity onPress={() => router.push("/perfil")}>
-          <Image
-            source={{ uri: "https://i.pravatar.cc/100" }}
-            style={styles.avatar}
-          />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.searchContainer}>
-        <Input
-          placeholder="Buscar pelada ou local"
-          value={busca}
-          onChangeText={setBusca}
-        />
-      </View>
-
-      <FlatList
-        data={filtrados}
-        renderItem={({ item }) => <CardMeusJogos jogos={item} />}
-        keyExtractor={(item) => item.id.toString()}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.select({ ios: "padding", android: "height" })}
+    >
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.listContent}
-      />
-    </SafeAreaView>
+      >
+        <View style={styles.container}>
+          <Image
+            source={require("../../assets/images/login.png")}
+            style={styles.illustration}
+          />
+
+          <Text style={styles.title}>Entrar </Text>
+          <Text style={styles.subTitle}>
+            Acesse sua conta com e-mail e senha.
+          </Text>
+
+          <View style={styles.form}>
+            <Input
+              placeholder="E-mail"
+              keyboardType="email-address"
+              value={email}
+              onChangeText={setEmail}
+            />
+            <Input
+              placeholder="Senha"
+              value={password}
+              onChangeText={setPassword}
+            />
+
+            <Button label="Entrar" onPress={handleLogin} />
+          </View>
+
+          <View style={styles.footerContainer}>
+            <Text style={styles.footerText}>Não tem uma conta?</Text>
+
+            <Link href={"/cadastro"}>
+              <Text style={styles.footerLink}> Cadastre-se aqui</Text>
+            </Link>
+          </View>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    backgroundColor: "#ffffff",
+    padding: 32,
   },
-  header: {
+
+  illustration: {
+    width: "100%",
+    height: 250,
+    resizeMode: "center",
+    marginTop: 20,
+  },
+
+  title: {
+    fontSize: 32,
+    fontWeight: 900,
+    color: "#000000",
+  },
+  subTitle: {
+    fontSize: 16,
+    color: "#000000",
+  },
+
+  form: {
+    marginTop: 24,
+    gap: 12,
+  },
+  footerText: {
+    fontSize: 16,
+    color: "#030303",
+  },
+  footerLink: {
+    marginLeft: 4,
+    fontWeight: 700,
+    color: "#28955fe9",
+  },
+
+  footerContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-  nome: {
-    fontSize: width * 0.06,
-    fontWeight: "bold",
-    color: "#1A1A1A",
-  },
-  subtitulo: {
-    fontSize: 14,
-    color: "#666",
-    marginTop: 2,
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 2,
-    borderColor: "#fff",
-  },
-  searchContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 10,
-  },
-  listContent: {
-    paddingHorizontal: 20,
-    paddingBottom: 120,
-  },
-  emptyText: {
-    textAlign: "center",
-    marginTop: 50,
-    color: "#999",
+    marginTop: 24,
   },
 });

@@ -6,82 +6,80 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Dimensions,
-  SafeAreaView,
+  Platform,
+  StatusBar,
 } from "react-native";
-
-const { width, height } = Dimensions.get("window");
-
 export default function Maps() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.titulo}>Mapa de Jogos</Text>
+          <Text style={styles.subtitulo}>Encontre locais próximos</Text>
+        </View>
+        <TouchableOpacity onPress={() => router.push("/perfil")}>
+          <Image
+            source={{ uri: "https://i.pravatar.cc/100" }}
+            style={styles.avatar}
+          />
+        </TouchableOpacity>
+      </View>
+
       <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.filtrosScroll}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
       >
-        <View style={styles.header}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.titulo}>Mapa de Jogos</Text>
-            <Text style={styles.subtitulo}>Encontre locais próximos</Text>
-          </View>
-          <TouchableOpacity onPress={() => router.push("/perfil")}>
-            <Image
-              source={{ uri: "https://i.pravatar.cc/100" }}
-              style={styles.avatar}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.filtrosScroll}
-          contentContainerStyle={{ paddingHorizontal: 20 }}
-        >
-          <TouchableOpacity style={styles.filtroAtivo}>
-            <Text style={styles.filtroTextoAtivo}>Todos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filtro}>
-            <Text style={styles.filtroTexto}>Quadras</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filtro}>
-            <Text style={styles.filtroTexto}>Campos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.filtro}>
-            <Text style={styles.filtroTexto}>Society</Text>
-          </TouchableOpacity>
-        </ScrollView>
-
-        <View style={styles.mapa}>
-          <Text style={{ color: "#567d5d", fontWeight: "bold" }}>
-            Será integrado com API de mapas posteriormente e exibirá os locais
-            próximos com base na localização do usuário.
-          </Text>
-        </View>
-
-        <View style={styles.content}>
-          <View style={styles.cardResumo}>
-            <Text style={styles.tituloCard}>12 locais encontrados</Text>
-            <Text style={styles.subCard}>
-              Quadras e campos em até 5 km de você.
-            </Text>
-            <TouchableOpacity style={styles.botaoRota}>
-              <Text style={styles.botaoRotaTexto}>Ver rota mais rápida</Text>
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.section}>Locais em destaque</Text>
-
-          <TouchableOpacity style={styles.cardLocal}>
-            <View>
-              <Text style={styles.nomeLocal}>Arena Zona Sul</Text>
-              <Text style={styles.distancia}>1,2 km de distância</Text>
-            </View>
-            <Text style={{ fontSize: 20 }}>⚽</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.filtroAtivo}>
+          <Text style={styles.filtroTextoAtivo}>Todos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.filtro}>
+          <Text style={styles.filtroTexto}>Quadras</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.filtro}>
+          <Text style={styles.filtroTexto}>Campos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.filtro}>
+          <Text style={styles.filtroTexto}>Society</Text>
+        </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+
+      <View style={styles.mapa}>
+        <Text
+          style={{
+            color: "#000000",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          Será integrado com API de mapas posteriormente e exibirá os locais
+          próximos com base na localização do usuário.
+        </Text>
+      </View>
+
+      <View style={styles.content}>
+        <View style={styles.cardResumo}>
+          <Text style={styles.tituloCard}>12 locais encontrados</Text>
+          <Text style={styles.subCard}>
+            Quadras e campos em até 5 km de você.
+          </Text>
+          <TouchableOpacity style={styles.botaoRota}>
+            <Text style={styles.botaoRotaTexto}>Ver rota mais rápida</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.section}>Locais em destaque</Text>
+
+        <TouchableOpacity style={styles.cardLocal}>
+          <View>
+            <Text style={styles.nomeLocal}>Arena Zona Sul</Text>
+            <Text style={styles.distancia}>1,2 km de distância</Text>
+          </View>
+          <Text style={{ fontSize: 20 }}>⚽</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
@@ -89,21 +87,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 20,
   },
   titulo: {
-    fontSize: width * 0.06,
+    fontSize: 30,
     fontWeight: "bold",
-    color: "#1A1A1A",
+    color: "#000000",
   },
   subtitulo: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#666",
     marginTop: 2,
   },
@@ -114,6 +113,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#fff",
   },
+
   filtrosScroll: {
     maxHeight: 50,
     marginBottom: 20,
@@ -139,8 +139,7 @@ const styles = StyleSheet.create({
   filtroTexto: { color: "#666", fontWeight: "600" },
   filtroTextoAtivo: { color: "#fff", fontWeight: "bold" },
   mapa: {
-    width: width - 40,
-    height: height * 0.25,
+    height: 200,
     backgroundColor: "#cde5d1",
     borderRadius: 20,
     marginHorizontal: 20,
@@ -150,6 +149,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#b5d4ba",
     borderStyle: "dashed",
+    padding: 20,
   },
   content: {
     paddingHorizontal: 20,

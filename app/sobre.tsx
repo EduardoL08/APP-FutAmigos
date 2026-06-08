@@ -71,7 +71,8 @@ export default function Sobre() {
         </Text>
         <Text style={[styles.cardTexto, { color: cores.textoSecundario }]}>
           Projeto Acadêmico — Desenvolvimento Mobile{"\n"}
-          Curso de Análise e Desenvolvimento de Sistemas
+          Curso de Sistemas de Inforação — Newton Paiva {"\n"}
+          Junho de 2026
         </Text>
       </View>
 

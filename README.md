@@ -117,24 +117,6 @@ futamigos/
 │       └── [id].tsx              # Editar partida
 |
 └── src/
-    ├── app/                          # Telas — Expo Router
-    │   ├── _layout.tsx               # AuthGuard + 4 Providers + footer com badge
-    │   ├── index.tsx                 # Login
-    │   ├── cadastro.tsx              # Cadastro
-    │   ├── home.tsx                  # Home com FlatList + Skeleton + RefreshControl
-    │   ├── meus-jogos.tsx            # Meus Jogos com banner de convites
-    │   ├── convites.tsx              # ★ Tela de convites com filtros
-    │   ├── mapa.tsx                  # Mapa com localização real
-    │   ├── perfil.tsx                # Perfil + ImagePicker
-    │   ├── configuracoes.tsx         # Configurações + modo escuro
-    │   ├── sobre.tsx                 # Sobre
-    │   ├── criar-partida.tsx         # Criar partida
-    │   ├── database.ts               # DBAdapter multiplataforma
-    │   ├── detalhes/
-    │   │   └── [id].tsx              # Detalhes + modal de convite
-    │   └── editar-partida/
-    │       └── [id].tsx              # Editar partida
-    │
     ├── components/                   # Componentes reutilizáveis
     │   ├── BotaoPadrao.tsx           # 4 variantes + spinner
     │   ├── CampoTexto.tsx            # Input com erro inline e tema
